@@ -26,7 +26,7 @@ export const booksSlice = createSlice({
       }),
     },
     deleteBook: booksAdapter.removeOne,
-    updateBook: booksAdapter.updateOne,
+    updateBook: booksAdapter.upsertOne,
   },
 });
 export const { addBook, deleteBook, updateBook } = booksSlice.actions;
