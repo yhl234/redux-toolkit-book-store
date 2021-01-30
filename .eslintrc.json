@@ -34,7 +34,9 @@
 			"singleQuote": true,
 			"printWidth": 80,
 			"tabWidth": 2,
-			"endOfLine": "auto"
+			"endOfLine": "auto",
+			"arrowParens": "avoid"
+			
 		}
 	],
 	"react/jsx-filename-extension": [
@@ -56,6 +58,7 @@
 	"import/no-named-as-default": "off",
 	"import/prefer-default-export": "off",
 	"no-constant-condition": "off",
+	"arrow-body-style": [ 2, "as-needed" ],
 	"global-require": "off",
 	"react/no-array-index-key": "off",
 	"react/no-unescaped-entities": "off",

@@ -7,6 +7,7 @@ import {
   incrementAsync,
   selectCount,
 } from './counterSlice';
+import { addBook } from '../books/booksSlice';
 import styles from './Counter.module.css';
 
 export function Counter() {
@@ -46,11 +47,11 @@ export function Counter() {
             dispatch(incrementByAmount(Number(incrementAmount) || 0))
           }
         >
-          Add Amount
+          Add Book
         </button>
         <button
           className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync(Number(incrementAmount) || 0))}
+          onClick={() => dispatch(addBook('name', 'a', 1))}
         >
           Add Async
         </button>
