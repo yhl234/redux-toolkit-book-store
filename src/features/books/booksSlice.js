@@ -16,19 +16,46 @@ export const booksSlice = createSlice({
   reducers: {
     addBook: {
       reducer: booksAdapter.addOne,
-      prepare: (name, category, price) => ({
+      prepare: (name, category, price, image = null) => ({
         payload: {
           _id: uuidv4(),
           name,
           category,
           price,
+          image: image || new Date().getSeconds(),
         },
       }),
     },
     deleteBook: booksAdapter.removeOne,
     updateBook: booksAdapter.upsertOne,
+    upsertBook: {
+      reducer: booksAdapter.upsertOne,
+      prepare: entity => {
+        const {
+          _id = uuidv4(),
+          name,
+          category,
+          price,
+          image = new Date().getSeconds(),
+        } = entity;
+        return {
+          payload: {
+            _id,
+            name: name.length > 0 ? name : 'untitled',
+            category: category.length > 0 ? category : 'uncategorized',
+            price: price > 0 ? price : 'unavailable',
+            image,
+          },
+        };
+      },
+    },
   },
 });
-export const { addBook, deleteBook, updateBook } = booksSlice.actions;
+export const {
+  addBook,
+  deleteBook,
+  updateBook,
+  upsertBook,
+} = booksSlice.actions;
 
 export default booksSlice.reducer;
