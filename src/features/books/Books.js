@@ -68,7 +68,8 @@ const Books = () => {
             size="small"
             color="secondary"
             onClick={() =>
-              dispatch(upsertBook({ name: '', category: '', price: 0 }))
+              // dispatch(upsertBook({ name: '', category: '', price: 0 }))
+              handleClickOpen('new')
             }
           >
             <Add />

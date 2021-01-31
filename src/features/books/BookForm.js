@@ -35,9 +35,9 @@ const BookForm = ({ open, handleClose, bookId }) => {
   const book = useSelector(state => selectBookById(state, bookId));
 
   const [form, setForm] = useState({
-    name: '',
-    category: '',
-    price: 0,
+    name: 'Sample Book',
+    category: 'eBook',
+    price: 2.99,
   });
 
   useEffect(() => {
@@ -49,23 +49,27 @@ const BookForm = ({ open, handleClose, bookId }) => {
 
   const handleInputChange = e => {
     const tempForm = { ...form };
-    tempForm[e.target.name] = e.target.value;
+    const { name, type } = e.target;
+    let { value } = e.target;
+    if (type === 'number') {
+      value = Number(String(value).replace(/[^0-9.-]+/g, ''));
+    }
+    tempForm[name] = value;
     setForm(tempForm);
   };
   const handleSubmit = e => {
-    console.log(form);
     dispatch(upsertBook(form));
     handleClose();
   };
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Subscribe</DialogTitle>
+      <DialogTitle>{form._id !== 'new' ? form.name : 'New Book'}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
+        {/* <DialogContentText>
           To subscribe to this website, please enter your email address here. We
           will send updates occasionally.
-        </DialogContentText>
+        </DialogContentText> */}
         <TextField
           autoFocus
           name="name"
@@ -84,6 +88,9 @@ const BookForm = ({ open, handleClose, bookId }) => {
         <TextField
           label="Price"
           type="number"
+          min="0.00"
+          max="10000.00"
+          step="0.01"
           name="price"
           fullWidth
           value={form.price}
