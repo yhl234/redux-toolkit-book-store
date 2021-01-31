@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid, Typography, Paper, Button } from '@material-ui/core';
 
 import { Add } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import Book from '../../components/book/Book';
-import {
-  addBook,
-  upsertBook,
-  deleteBook,
-  selectAllBooks,
-  selectBookById,
-} from './booksSlice';
+import { deleteBook, selectAllBooks } from './booksSlice';
 import BookForm from './BookForm';
 
 const useStyles = makeStyles({
@@ -27,14 +21,6 @@ const Books = () => {
   const books = useSelector(selectAllBooks);
   const [open, setOpen] = useState(false);
   const [bookId, setBookId] = useState('new');
-  // const tempBook = useSelector(state => selectBookById(state, bookId));
-
-  // useEffect(() => {
-  //   // if (bookId && bookId !== 'new') {
-  //   //   console.log(tempBook);
-  //   // }
-  //   console.log(bookId, tempBook);
-  // }, [bookId, tempBook]);
 
   const handleDeleteClick = (e, id) => {
     e.stopPropagation();
@@ -67,10 +53,7 @@ const Books = () => {
           <Button
             size="small"
             color="secondary"
-            onClick={() =>
-              // dispatch(upsertBook({ name: '', category: '', price: 0 }))
-              handleClickOpen('new')
-            }
+            onClick={() => handleClickOpen('new')}
           >
             <Add />
             New Book

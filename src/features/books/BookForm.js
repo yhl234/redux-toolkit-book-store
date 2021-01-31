@@ -3,24 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  Grid,
-  Typography,
-  Paper,
   Button,
   TextField,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
 } from '@material-ui/core';
-import {
-  addBook,
-  updateBook,
-  deleteBook,
-  upsertBook,
-  selectBookById,
-} from './booksSlice';
+import { upsertBook, selectBookById } from './booksSlice';
 
 const useStyles = makeStyles({
   root: {
@@ -66,10 +56,6 @@ const BookForm = ({ open, handleClose, bookId }) => {
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>{form._id !== 'new' ? form.name : 'New Book'}</DialogTitle>
       <DialogContent>
-        {/* <DialogContentText>
-          To subscribe to this website, please enter your email address here. We
-          will send updates occasionally.
-        </DialogContentText> */}
         <TextField
           autoFocus
           name="name"
